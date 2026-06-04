@@ -10,7 +10,7 @@
 <?php
 $nombreProducto = "Iphone 15 Pro";
 
-$precio = 20,000;
+$precio = 20000;
 
 $disponibilidad ="10 Unidades";
 
