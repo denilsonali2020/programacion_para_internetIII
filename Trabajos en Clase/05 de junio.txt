@@ -1,0 +1,20 @@
+"Sistema de Control de Envíos"
+Instrucciones para el estudiante:
+Una empresa de logística necesita una herramienta web interna para que los operarios registren la salida de los camiones de carga. Debes crear un archivo llamado transporte.php que contenga un formulario y su respectivo procesamiento backend.
+
+El formulario debe solicitar 3 datos obligatorios:
+
+Nombre del Conductor (Texto)
+
+Código de la Maquinaria/Camión (Texto, ej: CAM-01)
+
+Peso de la carga en Kilogramos (Número entero)
+
+Reglas del Negocio (Backend en PHP):
+Al presionar el botón "Registrar Salida", el sistema debe capturar los datos mediante $_POST y evaluar lo siguiente:
+
+Si el peso es mayor a 5,000 kg, mostrar un mensaje de alerta en color rojo que diga: "Alerta: El camión requiere un pago de impuesto por sobrepeso".
+
+De lo contrario, mostrar un mensaje en color verde que diga: "Tránsito autorizado: Peso dentro del límite legal".
+
+Además, debes imprimir un resumen con los datos del conductor y el peso formateado con separación de miles (ej: 5,400 kg).
