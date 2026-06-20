@@ -1,8 +1,7 @@
 <?php
 
-// 1. Definir parametros de conexion
 $host = "localhost";
-$db_name = "empleados";
+$db_name = "sistema_empleados";
 $db_username = "root";
 $db_password = "";
 
