@@ -1,5 +1,11 @@
+<?php
+$empleado = EmpleadoController::listar();
+?>
+
+
+
 <div class="container-fluid p-4">
-    <h1 class="mb-4"><i class="bi bi-people-fill"></i> Lista de Empleados</h1>
+    <h1 class="mb-4 text-success"><i class="bi bi-people-fill"></i> <strong>Lista de Empleados</strong></h1>
 
     <?php if (isset($_GET['mensaje'])): ?>
         <div class="alert alert-success alert-dismissible fade show">
@@ -23,7 +29,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $empleados = EmpleadoController::listar($conexion); ?>
+                        <?php $empleados = EmpleadoController::listar(); ?>
                         <?php if (is_array($empleados) && count($empleados) > 0): ?>
                             <?php foreach ($empleados as $emp): ?>
                                 <tr>
@@ -48,7 +54,7 @@
                         <?php else: ?>
                             <tr>
                                 <td colspan="6" class="text-center text-muted">
-                                    No hay empleados registrados aun.
+                                    No hay empleados registrados aún.
                                 </td>
                             </tr>
                         <?php endif; ?>
