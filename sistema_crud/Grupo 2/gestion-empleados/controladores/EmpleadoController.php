@@ -39,6 +39,13 @@ class EmpleadoController {
         }
     }
 
+    public static function eliminar($id){
+        global $conexion;
+        $stmt = $conexion->prepare("DELETE FROM empleados WHERE id = :id");
+        $stmt->bindParam(":id", $id);
+        if($stmt->execute()){
+            header("Location: index.php?msg=eliminado");
+        }
+    }
 }
-
 ?>
