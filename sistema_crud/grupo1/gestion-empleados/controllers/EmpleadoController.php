@@ -21,7 +21,7 @@ class EmpleadoController {
         header("Location: index.php");
         exit;
     }
-}
+
      public static function eliminar($id) {
         global $conexion;
         $stmt = $conexion->prepare("DELETE FROM empleados WHERE id = :id");
@@ -39,7 +39,6 @@ class EmpleadoController {
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-         
-     
+             
 }
 ?>
