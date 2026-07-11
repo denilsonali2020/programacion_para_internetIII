@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lab4_Trochez_Denilson</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="p-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5">
+          <div class="border p-3">
+            <h5>Formulario</h5>
+            <form id="formEquipos">
+              <div class="mb-2">
+                <input
+                  type="text"
+                  id="codigo"
+                  class="form-control"
+                  placeholder="Código (E001)"
+                  autocomplete="off"
+                />
+                <div id="errorCodigo" class="text-danger"></div>
+              </div>
+              <div class="mb-2">
+                <input
+                  type="text"
+                  id="nombre"
+                  class="form-control"
+                  placeholder="Nombre"
+                  autocomplete="off"
+                />
+                <div id="errorNombre" class="text-danger"></div>
+              </div>
+              <div class="mb-2">
+                <select id="categoria" class="form-select">
+                  <option value="">Seleccione categoría</option>
+                  <option value="Servidores">Servidores</option>
+                  <option value="Redes">Redes</option>
+                  <option value="Laptops">Laptops</option>
+                </select>
+                <div id="errorCategoria" class="text-danger"></div>
+              </div>
+              <div class="mb-2">
+                <input
+                  type="number"
+                  id="precio"
+                  class="form-control"
+                  placeholder="Precio"
+                  autocomplete="off"
+                />
+                <div id="errorPrecio" class="text-danger"></div>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                Registrar Equipo
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-md-7">
+          <h5>
+            Equipos
+            <span id="contadorItems" class="badge bg-secondary">0</span>
+          </h5>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th>Precio</th>
+              </tr>
+            </thead>
+            <tbody id="tablaCuerpo"></tbody>
+          </table>
+          <button id="btnLimpiar" class="btn btn-warning">Limpiar Tabla</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const form = document.getElementById("formEquipos");
+      const tabla = document.getElementById("tablaCuerpo");
+      const contadorItems = document.getElementById("contadorItems");
+      const btnLimpiar = document.getElementById("btnLimpiar");
+      let contador = 0;
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        //recuperamos values
+        const codigo = document.getElementById("codigo").value;
+        const nombre = document.getElementById("nombre").value;
+        const categoria = document.getElementById("categoria").value;
+        const precio = parseFloat(
+          document.getElementById("precio").value,
+        ).toFixed(2);
+
+        //limpiar errores previos cada vez
+        document.querySelectorAll(".text-danger").forEach((el) => {
+          el.textContent = "";
+        });
+
+        //validaciones
+        let formularioValido = true;
+        //validar codigo empieze con E y le sigan numeros ('Esto se investigo en internet ING :) ')
+        const regex = /^E\d+$/; // expresion regular
+
+        if (!regex.test(codigo)) {
+          document.getElementById("errorCodigo").textContent =
+            "Formato no valido";
+          formularioValido = false;
+        }
+
+        if (nombre.length < 5) {
+          document.getElementById("errorNombre").textContent =
+            "Minimo 5 caracteres";
+          formularioValido = false;
+        }
+
+        if (categoria === "") {
+          document.getElementById("errorCategoria").textContent =
+            "Seleccione una categoria";
+          formularioValido = false;
+        }
+
+        if (isNaN(precio) || precio <= 0) {
+          document.getElementById("errorPrecio").textContent =
+            "Precio no valido";
+          formularioValido = false;
+        }
+
+        if (formularioValido) {
+          const fila = `<tr>
+            <td>${codigo}</td>
+            <td>${nombre}</td>
+            <td>${categoria}</td>
+            <td>${precio}</td>
+                </tr>`;
+
+          tabla.innerHTML += fila;
+          contador++;
+          contadorItems.textContent = contador;
+
+          form.reset();
+        }
+      });
+
+      btnLimpiar.addEventListener("click", () => {
+        if (confirm("¿Esta seguro de limpiar la tabla?")) {
+          tabla.textContent = "";
+
+          contador = 0;
+          contadorItems.textContent = contador;
+        }
+      });
+    </script>
+  </body>
+</html>
